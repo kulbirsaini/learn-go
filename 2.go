@@ -1,8 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-func fibonacci() func() int {
+func nthFibonacci() func() int {
 	x, y := 1, 0
 
 	return func() int {
@@ -12,7 +14,7 @@ func fibonacci() func() int {
 }
 
 func main() {
-	f := fibonacci()
+	f := nthFibonacci()
 	sum := 0
 	max := int(4e6)
 	for {
