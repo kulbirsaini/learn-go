@@ -20,7 +20,7 @@ func largestProduct(grid [][]int, digits int) int {
 	for i := 0; i < width; i++ {
 		for j := 0; j < height; j++ {
 			p = 1
-			for k := 0; k < digits && i+k < width; k++ {
+			for k := 0; k < digits && i+digits < width; k++ {
 				p *= grid[i+k][j]
 			}
 
@@ -29,7 +29,7 @@ func largestProduct(grid [][]int, digits int) int {
 			}
 
 			p = 1
-			for k := 0; k < digits && j+k < height; k++ {
+			for k := 0; k < digits && j+digits < height; k++ {
 				p *= grid[i][j+k]
 			}
 
@@ -38,7 +38,7 @@ func largestProduct(grid [][]int, digits int) int {
 			}
 
 			p = 1
-			for k := 0; k < digits && i+k < width && j+k < height; k++ {
+			for k := 0; k < digits && i+digits < width && j+digits < height; k++ {
 				p *= grid[i+k][j+k]
 			}
 
@@ -47,7 +47,7 @@ func largestProduct(grid [][]int, digits int) int {
 			}
 
 			p = 1
-			for k := 0; k < digits && i-k >= 0 && j+k < height; k++ {
+			for k := 0; k < digits && i-digits >= 0 && j+digits < height; k++ {
 				p *= grid[i-k][j+k]
 			}
 
@@ -80,8 +80,5 @@ func main() {
 		}
 	}
 
-	for _, value := range grid {
-		fmt.Println(value)
-	}
 	fmt.Println(largestProduct(grid, 4))
 }
