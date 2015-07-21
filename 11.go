@@ -19,40 +19,49 @@ func largestProduct(grid [][]int, digits int) int {
 	height := len(grid[0])
 	for i := 0; i < width; i++ {
 		for j := 0; j < height; j++ {
-			p = 1
-			for k := 0; k < digits && i+digits < width; k++ {
-				p *= grid[i+k][j]
+			if i+digits < width {
+				p = 1
+				for k := 0; k < digits; k++ {
+					p *= grid[i+k][j]
+				}
+
+				if p > product {
+					product = p
+				}
 			}
 
-			if p > product {
-				product = p
+			if j+digits < height {
+				p = 1
+				for k := 0; k < digits; k++ {
+					p *= grid[i][j+k]
+				}
+
+				if p > product {
+					product = p
+				}
 			}
 
-			p = 1
-			for k := 0; k < digits && j+digits < height; k++ {
-				p *= grid[i][j+k]
+			if i+digits < width && j+digits < height {
+				p = 1
+				for k := 0; k < digits; k++ {
+					p *= grid[i+k][j+k]
+				}
+
+				if p > product {
+					product = p
+				}
 			}
 
-			if p > product {
-				product = p
-			}
+			if i-digits >= 0 && j+digits < height {
 
-			p = 1
-			for k := 0; k < digits && i+digits < width && j+digits < height; k++ {
-				p *= grid[i+k][j+k]
-			}
+				p = 1
+				for k := 0; k < digits; k++ {
+					p *= grid[i-k][j+k]
+				}
 
-			if p > product {
-				product = p
-			}
-
-			p = 1
-			for k := 0; k < digits && i-digits >= 0 && j+digits < height; k++ {
-				p *= grid[i-k][j+k]
-			}
-
-			if p > product {
-				product = p
+				if p > product {
+					product = p
+				}
 			}
 		}
 	}
